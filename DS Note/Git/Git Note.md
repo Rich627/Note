@@ -93,5 +93,9 @@ B想要加檔案
 8.確認推上去後在B的repo下create pull requests
 9.等待同意後就搞定了下次要加檔案再重新一次
 ```
+
+#### 添加SSH
+https://ithelp.ithome.com.tw/articles/10205988
+
 ###### Commit Message
 https://wadehuanglearning.blogspot.com/2019/05/commit-commit-commit-why-what-commit.html
