@@ -1,4 +1,4 @@
-#### LSTM
+##### LSTM
 分為input, input_gate, forgot_gate, output_gate
 會用sigmoid作為gate的activation原因是output會界在0~1可視為機率
 ```Python
@@ -12,9 +12,8 @@ model = tf.keras.Sequential([
 
 ```
 
-## Convolutional Neural Network(CNN)
+##### Convolutional Neural Network(CNN)
 
-###### CV
 ```Python
 model = tf.keras.models.Sequential([
 
@@ -121,7 +120,6 @@ ImageDataGenerator(rescale=1./255.)
 ```
 
 ## Recurrent Neural Network(RNN)
-NLP
 ```Python
 model = tf.keras.Sequential([
 		 tf.keras.layers.Embedding(vocab_size, embedding_dim, input_length=max_length),

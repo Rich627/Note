@@ -1,7 +1,6 @@
 ###### 下載repo
 ```Terminal
 git clone git@github.com:Rich627/xx.git
-
 ```
 
 ###### 同步已下載的repo
