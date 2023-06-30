@@ -68,3 +68,103 @@ class Solution:
             curr = curr.next
         
         return dummy.next
+```
+
+#### 205. Isomorphic Strings
+```python
+```python
+class Solution:
+    def isIsomorphic(self, s: str, t: str) -> bool:
+        map = {}
+        for i in range(len(s)):
+            #找找看新對應
+            if s[i] not in map:
+                map[s[i]] = t[i]
+            elif map[s[i]] != t[i]:
+                return False
+            #還要check對應有沒有重複(1-1)
+        mapval = [map[k] for k in map]
+        #set會顯示唯一, 如果長度和mapval一樣就代表1-1
+        return len(mapval) == len(set(mapval))
+```
+#### 217. Contains Duplicate
+```python
+class Solution:
+
+def containsDuplicate(self, nums: List[int]) -> bool:
+
+hashset = []
+
+
+for i in nums:
+
+hashset.append(i)
+
+return len(hashset) != len(set(hashset))
+```
+
+#### 206 Reverse Linked List
+```python
+# Definition for singly-linked list.
+
+# class ListNode:
+
+# def __init__(self, val=0, next=None):
+
+# self.val = val
+
+# self.next = next
+
+class Solution:
+
+def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+
+#3個指針, 前面當前後面
+
+prev = None
+
+curr = head
+
+#如果點還有就繼續
+
+while curr:
+
+#下一個點就是現在往後
+
+next = curr.next
+
+#下一個點指向前面
+
+curr.next = prev
+
+#前面往後移
+
+prev = curr
+
+#現在往後移
+
+curr = next
+
+return prev
+```
+
+#### 219. Contains Duplicate II
+```python
+```python
+class Solution:
+    def containsNearbyDuplicate(self, nums: List[int], k: int) -> bool:
+        #用字典來解
+        #字典會對應value和index
+        #關鍵紀錄值和index
+        hashset = {}
+
+        for i in range(len(nums)):
+            #如果值在字典裡面就計算
+            if nums[i] in hashset and abs(i-hashset[nums[i]]) <= k:
+                return True
+            #不在裡面就把index和val加進去
+            hashset[nums[i]] = i
+        
+        return False
+```
+```
