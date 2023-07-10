@@ -153,7 +153,10 @@ SELECT col1 FROM table1
 UNION ALL 
 SELECT col2 FROM table2;
 ```
-
+#### 計算相差日期天數
+```SQL
+DATEDIFF(xx, xx)
+```
 ###### 子查詢
 ```SQL
 #子查詢要加()
