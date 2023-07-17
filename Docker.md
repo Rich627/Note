@@ -1,73 +1,90 @@
-
+Download Image
+```shell
+sudo docker pull IMAGE_NAME
+```
   
+Run Docker
+```shell
+docker run -p local_port:port IMAGE_NAME
+```
 
-* 建立Docker Image
+Delete Image
+```Shell
+docker rmi IMAGE_NAME/TAG
+```
 
-* 編寫應用程序
+Delete All Image
+```Shell
+docker rmi $(docker images -aq)
+```
 
-* 推上GitHub
+Check  Image List
+```shell
+sudo docker image ls
+```
 
-* DockerHub云编译打包
+Check Container List
+```Shell
+docker ps
+```
 
-* 下载使用Docker Image
+Execute Docker 
+```Shell
+docker exec -it CONTAINER ID bash
+```
 
+Put Data into Docker env(can't save file)
+```Shell
+docker cp FILE_NAME CONTAINER ID:DOCKERENV_PATH
+```
 
+Docker Volume
+```Shell
+docker run -v LOCAL_PATH -p local_port:port DOCKERENV_PATH
+```
 
-~~~bash
-$ sudo docker image pull node:8.16.1
+Build Image
+```shell
+docker build -t TAG_NAME .
+```
 
-$ sudo docker image ls
+Stop Container
+```Shell
+docker stop $(docker ps -aq)
+```
 
-# 寫一個node.js應用
-$ vim helo.js
+Delete Container
+```Shell
+docker rm CONTAINER ID/NAME
+```
 
-#node.js語法
-console.log("I love this game.")
+Delete All Container
+```Shell
+docker rm $(docker ps -aq)
+```
 
-# 要运行这个应用，首先建立一个Node.js的运行环境(container/容器)
+Download python lib
+```Shell
+FROM IMGE_NMAE
 
-$ nano Dockerfile
+# 複製並設定工作目錄
+WORKDIR /work
 
-...
+# 複製 requirements.txt 到容器內
+COPY requirements.txt .
 
-FROM node:8.16.1
+# 安裝 Python 套件
+RUN pip install --no-cache-dir -r requirements.txt
 
-  
+# 複製整個目錄到容器內
+COPY . .
 
-RUN mkdir /src
+# 暴露 Jupyter Notebook 的預設埠號
+EXPOSE 8888
 
-  
-
-COPY helo.js /src
-
-CMD ["node", "/src/helo.js"]
-
-...
-
-# 编译打包我们的运行环境
-$ sudo docker image build -t komavideo/mynode:v01 .
-
-#列出當前的docker image有哪些
-$ sudo docker image ls
-
-# 在环境中运行我们的应用
-$ sudo docker container run komavideo/mynode:v01
-
-~~~
-
-
-
-
-~~~bash
-
-# 取得運行環境
-
-$ sudo docker image pull komavideo/mynode:latest
-
-$ sudo docker container run komavideo/mynode:latest
-
-$ sudo docker image pull komavideo/mynode:v01
-
-$ sudo docker container run komavideo/mynode:v01
-
-~~~
+# 啟動 Jupyter Notebook
+CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root"]
+-----------------------------------------------
+docker build -t TAG_NAME .
+docker run -p 8888:8888 TAG_NAME
+```
