@@ -155,7 +155,7 @@ SELECT col2 FROM table2;
 ```
 #### 計算相差日期天數
 ```SQL
-DATEDIFF(xx, xx)
+DATEDIFF(end_date, start_date)
 ```
 ###### 子查詢
 ```SQL
@@ -163,6 +163,8 @@ DATEDIFF(xx, xx)
 SELECT col1, col2 FROM table_name 
 WHERE col (SELECT col FROM table_name WHERE condi);
 ```
+
+fomating function
 
 **SELECT "欄位1", SUM("欄位2")  
 FROM "表格名"  
