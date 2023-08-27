@@ -1,0 +1,184 @@
+#insert 
+db.collections.insertOne(json)
+db.collections.insertMany([<json1>, <json2>...])
+
+#find
+很像sql裡面的select
+db.collections.find(cond)
+#多條件查詢$and可以改成$or
+db.col.find({$and":[<json1>, <json2>])})
+#運算符
+a = 1
+{a:1}
+a<>1 //a!=1
+{a:{$ne:1}}
+a>1
+{a:{$gt:1}}
+a>=1
+{a:{$gte:1}}
+a<1
+{a:{$lt:1}}
+a<=1
+{a:{$lte:1}}
+a=1 and b=1
+{a:1, b:1} or {$and: ]{a:1}, {b:1}]}
+a=1 or b=1
+{$or : [{a:1}, {b:1}]}
+a is null {a : {$exits: false}}
+a in (1, 2, 3)
+{a : {$in :[1, 2, 3]}} 
+
+#子文檔查詢
+db.xx.find({"from.xx":xx})
+db.fruit.find({$or :[{color: "red"}, {color:"green"}]})
+#elemMatch用法滿足多個條件
+db.getCollection("movies').find({"filming_locations": {
+$eleMatch: {"city": "Rome", "country": "USA"}}})
+
+#remove
+db.testol.remove(條件)
+//全刪
+db.test.remove({})
+
+#update
+db.collections.update(<查訊條件>, <更新字斷>}
+不管滿足條件多少默認只更新第一條
+
+#將該collections全部刪掉
+db.collections.drop()
+#刪掉database
+db.dropDatabase()
+#聚合運算
+Pipeline = [$stage1, $stage2, ... $stageN];
+db.colletion.arregate(pipeline, {option});
+
+#stage
+$match <-> where
+$project <-> as
+$sort <-> order by
+$group <-> group by
+$skip/$limit <-> skip/limit
+$lookup <-> left outer join
+
+#聚合查詢
+Select
+First_name as '名'
+last_name as '性'
+Where anger = '男'
+//跳過100後再顯示20條
+Skip 100
+Limit 20
+
+Db.users.aggreate([
+{$natch:{gender:"男"}},
+{$slip:100},
+{$limit:20},
+{$project:{
+'名':first)name', 
+'性':$last_name'}}
+]);
+
+db.orders.aggregate([
+    {$group:
+    {_id: null,
+    total:{$sum: "$total"}
+    }
+    }
+])
+
+db.orders.aggregate([
+    {
+        $match: {
+            status: "completed",
+            orderDate: {
+                $gte: ISODate("2019-01-01"),
+                $lt: ISODate("2019-03-01")
+            }
+        }
+    },
+    {
+        $group: {
+            _id: null,
+            total: { $sum: "$total" },
+            shippingfee: { $sum: "$shippingFee" },
+            count: { $sum: 1 }
+        }
+    },
+    {
+        $project: {
+            //創一個新的變量
+            grandTotal: { $add: ["$total", "$shippingfee"] }, 
+            //1是顯示0是不顯示
+            count: 1,
+            _id: 0
+        }
+    }
+])
+
+rich> db.stats()
+{
+  db: 'rich',
+  collections: 3,
+  views: 0,
+  objects: 0,
+  avgObjSize: 0,
+  dataSize: 0,
+  storageSize: 12288,
+  indexes: 3,
+  indexSize: 12288,
+  totalSize: 24576,
+  scaleFactor: 1,
+  fsUsedSize: 260151152640,
+  fsTotalSize: 494384795648,
+  ok: 1
+}
+
+
+//查詢幾條
+db.collection.count();
+
+//mongo彈性比較大
+db.test.insert({
+    test1: "hi"
+})
+db.test.insert({
+    test1: "hi",
+    test2: "hello"
+})
+
+//內容有u的
+db.posts.find（｛"title"： /u/｝）；
+//內容有R開頭的
+db.posts.find（｛"title"： /^R/｝）；
+//算一下有幾種不圖的title
+db.test.distinct("title")
+
+//抽出指定的col, true和1都會顯示
+db.test.find({}, title:true, rank:1)
+
+//相乘
+$mul
+$set 新增or修改
+$unset字段刪除
+
+//可以加10上去
+db.posts.updat(xxx. {$inc: {rank: 10}})
+
+//upsert 有則更新, 無則追加
+db.test.update({title: "hi"}, {upsert: true})
+
+//列出所有index
+db.test.getIndexes();
+//刪掉index
+db.test.dropIndex({rank: -1})
+//建立index, 可以加unique
+db.test.createIndex({rank: -1}, {unique: ture})
+
+//創建一個dir並備份
+mkdir xx
+cd xx
+mondodump -d Database
+//刪掉全部數據並回覆
+mongorestore --drop
+
+
